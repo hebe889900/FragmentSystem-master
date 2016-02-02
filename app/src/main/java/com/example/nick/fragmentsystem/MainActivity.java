@@ -1,6 +1,8 @@
 package com.example.nick.fragmentsystem;
 
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -14,9 +16,10 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
     private Button EnterNames,Store,Load,View,Exit;
     private List<View> viewList;
+    private List<Fragment> fragmentList;
     private ViewPager pager;
 
     @Override
@@ -37,7 +40,19 @@ public class MainActivity extends AppCompatActivity {
 
         MyPagerAdapter adapter = new MyPagerAdapter(viewList);
         pager = (ViewPager)findViewById(R.id.pager);
-        pager.setAdapter(adapter);
+        //pager.setAdapter(adapter);
+
+
+        fragmentList = new ArrayList<Fragment>();
+        fragmentList.add(new EnterNames());
+        fragmentList.add(new Load());
+        fragmentList.add(new Store());
+        fragmentList.add(new ViewFragment());
+        fragmentList.add(new Exit());
+
+        MyFragmentPagerAdapter fragmentAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),fragmentList);
+        pager.setAdapter(fragmentAdapter);
+
         EnterNames = (Button)findViewById(R.id.enterNames);
         Store = (Button)findViewById(R.id.store);
         Load = (Button)findViewById(R.id.load);
