@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">FragmentSystem</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="form_title">Enter your information</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_age">Your Age</string>
+    <string name="foodtype1">Chicken</string>
+    <string name="foodtype2">Beef</string>
+    <string name="foodtype3">Pork</string>
+    <string name="foodtype4">Lamb</string>
+</resources>
