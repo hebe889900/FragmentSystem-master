@@ -9,8 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Detail_Fragment extends Fragment {
 
+    private List<Fragment> FragmentList;
     /**
      * Create a new instance of DetailsFragment, initialized to
      * show the text at 'index'.
@@ -46,14 +50,20 @@ public class Detail_Fragment extends Fragment {
             return null;
         }
 
-        ScrollView scroller = new ScrollView(getActivity());
-        TextView text = new TextView(getActivity());
-        int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                4, getActivity().getResources().getDisplayMetrics());
-        text.setPadding(padding, padding, padding, padding);
-        scroller.addView(text);
-        text.setText("Kim Taeyeon");
-        return scroller;
+        switch(getShownIndex()){
+            case 0:
+                return inflater.inflate(R.layout.fragment_enter_names, container, false);
+            case 1:
+                return inflater.inflate(R.layout.fragment_store, container, false);
+            case 2:
+                return inflater.inflate(R.layout.fragment_load, container, false);
+            case 3:
+                return inflater.inflate(R.layout.fragment_view, container, false);
+            case 4:
+                System.exit(0);
+            default:
+                return null;
+        }
     }
 }
 
