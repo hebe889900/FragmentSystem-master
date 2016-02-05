@@ -6,7 +6,10 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,6 +18,8 @@ import java.util.List;
 public class Detail_Fragment extends Fragment {
 
     private List<Fragment> FragmentList;
+    private View view;
+    private List<List<String>> InfoList = new ArrayList<List<String>>();
     /**
      * Create a new instance of DetailsFragment, initialized to
      * show the text at 'index'.
@@ -52,18 +57,39 @@ public class Detail_Fragment extends Fragment {
 
         switch(getShownIndex()){
             case 0:
-                return inflater.inflate(R.layout.fragment_enter_names, container, false);
+                view = inflater.inflate(R.layout.fragment_enter_names, container, false);
+                Button submit = (Button) view.findViewById(R.id.button);
+                EditText editName = (EditText) view.findViewById(R.id.EditTextName);
+                EditText editAge = (EditText) view.findViewById(R.id.EditAge);
+                Spinner spinner = (Spinner)view.findViewById(R.id.SpinnerFeedbackType);
+                if(editName.getText()!=null && editAge.getText()!=null && spinner.getSelectedItem()!=null){
+                submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String name =  ((EditText) view.findViewById(R.id.EditTextName)).getText().toString();
+                        String age = ((EditText) view.findViewById(R.id.EditAge)).getText().toString();
+                        String fruit = ((Spinner) view.findViewById(R.id.SpinnerFeedbackType)).getSelectedItem().toString();
+                        List<String> smallList = new ArrayList<String>();
+                        smallList.add(name);
+                        smallList.add(age);
+                        smallList.add(fruit);
+                        InfoList.add(smallList);//add the input to the list
+                    }
+                });
+            }
             case 1:
-                return inflater.inflate(R.layout.fragment_store, container, false);
+                view = inflater.inflate(R.layout.fragment_store, container, false);
             case 2:
-                return inflater.inflate(R.layout.fragment_load, container, false);
+                view = inflater.inflate(R.layout.fragment_load, container, false);
             case 3:
-                return inflater.inflate(R.layout.fragment_view, container, false);
+                view = inflater.inflate(R.layout.fragment_view, container, false);
             case 4:
                 System.exit(0);
             default:
-                return null;
+                view = inflater.inflate(R.layout.activity_my_list_fragment, container, false);
         }
+
+        return view;
     }
 }
 
