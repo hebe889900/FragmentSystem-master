@@ -1,10 +1,13 @@
 package com.example.nick.fragmentsystem;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity implements OnButtonClickedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,5 +27,19 @@ public class DetailsActivity extends AppCompatActivity {
             details.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction().add(android.R.id.content,details).commit();
         }
+    }
+
+    public void onButtonClicked(View view) {
+        // This method is called from fragment A, and when it is called,
+        //   it will send information to fragment B. Remember to first
+        //   check to see if fragment B is non-null.
+
+        /* Make call to a method in fragment B that will update its display */
+        Context context = view.getContext();
+        CharSequence text = "Button Clicked!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 }

@@ -13,4 +13,6 @@
     <string name="foodtype3">Pork</string>
     <string name="foodtype4">Lamb</string>
     <string name="submit">Submit</string>
+    <string name="nameyourfile">Name your file</string>
+    <string name="yourfilename">Your filename</string>
 </resources>

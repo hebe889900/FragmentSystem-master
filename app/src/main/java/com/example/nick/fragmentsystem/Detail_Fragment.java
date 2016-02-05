@@ -1,5 +1,7 @@
 package com.example.nick.fragmentsystem;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -17,9 +19,7 @@ import java.util.List;
 
 public class Detail_Fragment extends Fragment {
 
-    private List<Fragment> FragmentList;
-    private View view;
-    private List<List<String>> InfoList = new ArrayList<List<String>>();
+    OnButtonClickedListener mListener;
     /**
      * Create a new instance of DetailsFragment, initialized to
      * show the text at 'index'.
@@ -57,7 +57,8 @@ public class Detail_Fragment extends Fragment {
 
         switch(getShownIndex()){
             case 0:
-                view = inflater.inflate(R.layout.fragment_enter_names, container, false);
+                return inflater.inflate(R.layout.fragment_enter_names, container, false);
+                /*
                 Button submit = (Button) view.findViewById(R.id.button);
                 EditText editName = (EditText) view.findViewById(R.id.EditTextName);
                 EditText editAge = (EditText) view.findViewById(R.id.EditAge);
@@ -77,19 +78,36 @@ public class Detail_Fragment extends Fragment {
                     }
                 });
             }
+            */
             case 1:
-                view = inflater.inflate(R.layout.fragment_store, container, false);
+                return inflater.inflate(R.layout.fragment_store, container, false);
             case 2:
-                view = inflater.inflate(R.layout.fragment_load, container, false);
+                return inflater.inflate(R.layout.fragment_load, container, false);
             case 3:
-                view = inflater.inflate(R.layout.fragment_view, container, false);
+                return inflater.inflate(R.layout.fragment_view, container, false);
             case 4:
                 System.exit(0);
             default:
-                view = inflater.inflate(R.layout.activity_my_list_fragment, container, false);
+                return null;
         }
+    }
 
-        return view;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (OnButtonClickedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnButtonClickedListener ");
+        }
+    }
+
+    public void clickButton() {
+        // When the button is clicked, notify the activity.
+        //   The activity will then pass the information to fragment
+        //   B (if it has been created).
+
+        mListener.onButtonClicked(getView());//get the current fragment view so that we can access to the button on that view
     }
 }
 
